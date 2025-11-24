@@ -161,6 +161,24 @@
     }
     /* Mobile */
     @media (max-width: 720px) {
+      .hero {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 16px 0 8px;
+      }
+      .hero img {
+        position: relative;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+      }
+      .hero .content {
+        padding: 24px 16px 12px;
+        color: var(--ink);
+      }
       .nav-links {
         position: fixed;
         inset: 0;
