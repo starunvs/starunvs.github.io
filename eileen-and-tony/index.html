@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eileen & Tony | Wedding</title>
+  <style>
+    :root {
+      --bg: #f6f1e9;
+      --ink: #1f2b2c;
+      --accent: #8a9b7a;
+      --soft: #d7cbb8;
+      --card: rgba(255, 255, 255, 0.85);
+      --max: 1100px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e0d6c9;
+    }
+    .nav,
+    .strip {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      gap: 16px;
+    }
+    .brand {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .nav-links a { padding: 8px 0; font-size: 15px; border-bottom: 2px solid transparent; }
+    .nav-links a:hover { border-color: var(--accent); color: var(--accent); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      color: var(--ink);
+      background: white;
+      font-weight: 600;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); background: #f9f6f0; }
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid #d0c4b7;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--ink);
+      margin: 4px 0;
+    }
+    .hero,
+    .hero-layer {
+      position: relative;
+      color: white;
+      min-height: 70vh;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6);
+    }
+    .hero .content,
+    .overlay-card {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(32px, 5vw, 48px);
+      letter-spacing: 0.03em;
+    }
+    .hero p { margin: 10px auto 24px; font-size: 18px; max-width: 640px; }
+    main { padding: 40px 16px 80px; }
+    section {
+      max-width: var(--max);
+      margin: 0 auto 36px;
+      background: var(--card);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.04);
+      border: 1px solid #e8dfd3;
+    }
+    section h2 {
+      margin-top: 0;
+      letter-spacing: 0.02em;
+    }
+    .grid,
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+    .card {
+      background: white;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #eadfd2;
+    }
+    .photo {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid #eadfd2;
+    }
+    .pill {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--soft);
+      border-radius: 999px;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 10px 40px;
+      color: #4a4a4a;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));
+    }
+    .about-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .about-grid .photo {
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Mobile */
+    @media (max-width: 720px) {
+      .nav-links {
+        position: fixed;
+        inset: 0;
+        background: rgba(255,255,255,0.97);
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+        transform: translateY(-100%);
+        transition: transform 200ms ease;
+      }
+      .nav-links.open { transform: translateY(0); }
+      .hamburger { display: inline-block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">Eileen & Tony 婚礼</div>
+      <button class="hamburger" aria-label="开启菜单" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">首页</a>
+        <a href="#words">新人寄语</a>
+        <a href="#labro">关于拉布罗</a>
+        <a href="#links">实用链接</a>
+        <a class="btn" href="https://eileenromano.wixsite.com/wedding-eileen-tony/d-tails-et-inscription/rsvp-for-eileen-tonys-wedding" target="_blank" rel="noreferrer noopener">立即回复</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <img src="Wedding-Eileen-And-Tony_files/e47b98_58dcff7d07444084937928502ac4d4bc~mv2.jpg" alt="Eileen and Tony hero">
+    <div class="content">
+      <div class="pill">2026 年 6 月 13-14 日 · 拉布罗，意大利</div>
+      <h1>托尼（邓中明）与艾琳的婚礼</h1>
+      <p>我们非常高兴地邀请您共聚意大利拉布罗，一起见证我们的承诺并分享喜悦。</p>
+      <a class="btn" href="https://eileenromano.wixsite.com/wedding-eileen-tony/d-tails-et-inscription/rsvp-for-eileen-tonys-wedding" target="_blank" rel="noreferrer noopener">立即回复 RSVP</a>
+    </div>
+  </section>
+
+  <main>
+    <section id="words">
+      <h2>新人寄语</h2>
+      <div class="grid">
+        <div>
+          <p>我们于2019年在芝加哥大学攻读硕士课程时相识，经过一段往来于美国、欧洲和中国的交往之后，我们决定减少碳足迹，在欧洲安家。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="labro">
+      <h2>关于拉布罗</h2>
+      <div class="about-grid">
+        <div class="card">
+          <p>婚礼在罗马附近列蒂市的山城拉布罗举办。这是一座保留中世纪风貌的美丽小镇，以鹅卵石街道（请小心高跟鞋）与远眺皮耶迪卢科湖的景色著称。</p>
+          <p>婚礼后的招待活动将在教堂旁边的新娘家族拥有的诺必里城堡举行。我们迫不及待想与您分享这座小镇的静谧与浪漫，希望也能成为您难忘的旅行回忆。</p>
+        </div>
+        <div>
+          <img class="photo" src="Wedding-Eileen-And-Tony_files/Labro-vista-panoramica-del-paese.jpg" alt="拉布罗风景">
+        </div>
+        <div>
+          <img class="photo" src="Wedding-Eileen-And-Tony_files/e47b98_96a269a2ee3644fc80fb15b1bb6bb05f~mv2.jpg" alt="新人照片">
+        </div>
+      </div>
+    </section>
+
+    <section id="links">
+      <h2>实用链接</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>RSVP</h3>
+          <p>请提前告诉我们您是否能出席，并提供同行信息，方便我们安排接待。</p>
+          <a class="btn" href="https://eileenromano.wixsite.com/wedding-eileen-tony/d-tails-et-inscription/rsvp-for-eileen-tonys-wedding" target="_blank" rel="noreferrer noopener">提交回复</a>
+        </div>
+        <div class="card">
+          <h3>Wedding Wish List</h3>
+          <p>若您想查看我们的婚礼愿望清单，请点击下方链接。</p>
+          <a class="btn" href="https://www.millemercismariage.com/eileentony/mariage-de-eileen-romano-et-tony-deng.html" target="_blank" rel="noreferrer noopener">开启愿望清单</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>我们期待与您一起庆祝这个特别的日子。Eileen & Tony · 2026</p>
+  </footer>
+
+  <script>
+    // Simple mobile menu toggle
+    const navLinks = document.getElementById('navLinks');
+    const toggle = document.getElementById('menuToggle');
+    const closeMenu = () => navLinks.classList.remove('open');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', closeMenu);
+    });
+  </script>
+</body>
+</html>
